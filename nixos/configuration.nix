@@ -101,12 +101,49 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+  # Text editors
   neovim
   vim
+  emacs
+  # Code editors
+  vscode
+  # Programming
+  pyenv
+  cargo
+  rustup
+  # Terminal
+  wezterm
+  fish
+  # Utilities
   wget
   git
+  fastfetch
+  qbittorrent
+  # Email client
+  evolution
+  # Productivity
+  anki-bin
+  todoist
+  # Gaming
+  steam
+  # Chat
+  discord
+  # Media  
+  vlc
   ];
 
+  # Fonts
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.meslo-lg
+    nerd-fonts.hack
+    nerd-fonts.proggy-clean-tt
+    nerd-fonts.tinos
+    nerd-fonts.ubuntu
+    nerd-fonts.ubuntu-sans
+    nerd-fonts.victor-mono
+    
+  ];
 
   # Enable bluetooth support system wide
   hardware.bluetooth = {
