@@ -12,31 +12,17 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-
-  outputs = { self, nixpkgs, home-manager }:
-    let
-      homeManagerDir = ./home_manager;
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
-    in { 
-      nixosConfigurations = {
-        citypop-linux-desktop = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./configuration.nix
-          ];
-        };
-      };
-      homeConfigurations = {
-        citypop = home-manager.lib.homeManagerConfiguration {
-          # Setup backups so old configs aren't obliterated
-          home-manager.backupFileExtension = ".backup";
-          home-manager.useUserPackages = true;
-          inherit pkgs;
-          modules = [
-            "${homeManagerDir}/home.nix"
-          ];
-        };
-      };
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+    nixosConfigurations.citypop-linux-desktop = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux"; # Or your system architecture
+      specialArgs = { inherit inputs; }; # Pass inputs to modules
+      modules = [
+        ./configuration.nix # Your main NixOS configuration
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.users.citypop = import ./home.nix; # Link user config
+        }
+      ];
     };
+  };
 }
