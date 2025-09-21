@@ -13,5 +13,6 @@
     qemu
     # Utilities
     wget
+    git
   ];
 }
