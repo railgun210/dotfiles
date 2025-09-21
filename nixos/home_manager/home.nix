@@ -10,6 +10,9 @@
   home.username = "citypop";
   home.homeDirectory = "/home/citypop";
 
+  # Default shell
+  programs.fish.enable = true;
+
   # Include other configuration files
   imports = [
     ./common-packages.nix
@@ -17,12 +20,4 @@
     ./desktop-environment.nix
     ./pyenv.nix
   ];
-
-  # Setup backups so old configs aren't obliterated
-  home-manager = {
-    backupFileExtension = "backup";
-  };
-
-  # Default shell
-  programs.fish.enable = true;
 }

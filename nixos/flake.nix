@@ -17,7 +17,6 @@
     let
       homeManagerDir = ./home_manager;
       system = "x86_64-linux";
-      username = "citypop";
       pkgs = import nixpkgs { inherit system; };
     in { 
       nixosConfigurations = {
@@ -30,6 +29,9 @@
       };
       homeConfigurations = {
         citypop = home-manager.lib.homeManagerConfiguration {
+          # Setup backups so old configs aren't obliterated
+          home-manager.backupFileExtension = ".backup";
+          home-manager.useUserPackages = true;
           inherit pkgs;
           modules = [
             "${homeManagerDir}/home.nix"
