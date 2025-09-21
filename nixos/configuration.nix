@@ -13,7 +13,7 @@ in {
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # Include base system-wide packages.
-      modulesDir/base-packages.nix
+      "${modulesDir}/base-packages.nix"
     ];
 
   nix = {
