@@ -36,7 +36,6 @@
             "${homeManagerDir}/desktop-environment.nix"
             "${homeManagerDir}/pyenv.nix"
           ];
-          inherit username;
           homeDirectory = "/home/${username}";
         };
       };
