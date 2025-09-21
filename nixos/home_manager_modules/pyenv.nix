@@ -1,3 +1,4 @@
+# Module to configure pyenv with Home Manager
 { config, pkgs, ... }:
 
 {

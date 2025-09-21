@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  homeManagerDir = ./home_manager;
+  homeManagerDir = ./home_manager_modules;
 in {
   nixpkgs.config = {
     allowUnfree = true;
