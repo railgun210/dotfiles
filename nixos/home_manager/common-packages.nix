@@ -15,7 +15,6 @@
     anki-bin
     todoist
     calibre
-    rustup
     # Utilities
     fastfetch
     qbittorrent

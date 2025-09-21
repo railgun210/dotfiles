@@ -9,8 +9,7 @@
   };
 
   home.packages = with pkgs; [
-    # Rust Tools
-    cargo
+    # Rust development
     rustup
     # General Development Tools
     docker
@@ -18,6 +17,8 @@
     # Code Editors
     vscode
     neovim
+    # Terminal Tools
+    tmux
   ];
 }
 

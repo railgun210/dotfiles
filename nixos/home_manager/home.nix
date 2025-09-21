@@ -18,7 +18,11 @@
     ./pyenv.nix
   ];
 
+  # Setup backups so old configs aren't obliterated
+  home-manager = {
+    backupFileExtension = "backup";
+  };
+
   # Default shell
   programs.fish.enable = true;
-  users.users.citypop.shell = pkgs.fish;
 }
