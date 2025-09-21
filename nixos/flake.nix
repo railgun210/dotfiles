@@ -17,6 +17,7 @@
     let
       homeManagerDir = "./home_manager";
       system = "x86_64-linux";
+      username = "citypop";
     in { 
       nixosConfigurations = {
         citypop-linux-desktop = nixpkgs.lib.nixosSystem {
@@ -31,13 +32,13 @@
         citypop = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
-            ${homeManagerDir}/common-packages.nix
-            ${homeManagerDir}/home-configuration.nix
-            ${homeManagerDir}/desktop-environment.nix
-            ${homeManagerDir}/pyenv.nix
+            "${homeManagerDir}/common-packages.nix"
+            "${homeManagerDir}/home-configuration.nix"
+            "${homeManagerDir}/desktop-environment.nix"
+            "${homeManagerDir}/pyenv.nix"
           ];
-          username = "citypop";
-          homeDirectory = "/home/citypop";
+          inherit username;
+          homeDirectory = "/home/${username}";
         };
       }
     };
