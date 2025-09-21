@@ -32,10 +32,7 @@
         citypop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            "${homeManagerDir}/common-packages.nix"
-            "${homeManagerDir}/home-configuration.nix"
-            "${homeManagerDir}/desktop-environment.nix"
-            "${homeManagerDir}/pyenv.nix"
+            "${homeManagerDir}/home.nix"
           ];
         };
       };
