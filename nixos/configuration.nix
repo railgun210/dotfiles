@@ -2,14 +2,26 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
+nix = {
+  package = pkgs.nixFlakes;
+  extraOptions = ''
+    experimental-features = nix-command flakes;
+  '';
+};
+
+
 { config, pkgs, ... }:
 
-{
+let
+  nixosDir = "/etc/nixos/";
+  moduleDir = "modules/";
+  homeManagerDir = "home-manager/";
+in {
   imports =
     [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
+      "${nixosDir}hardware-configuration.nix"
+      "${modulesDir}base-packages.nix" 
     ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -46,7 +58,7 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
+  # Enable the KDE Plasma Desktop Environment System-wide as our default environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
@@ -86,10 +98,6 @@
     isNormalUser = true;
     description = "Ayun Daywhea";
     extraGroups = [ "networkmanager" "wheel" "citypop"];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
   };
 
     # Install firefox.
@@ -98,41 +106,15 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  # Text editors
-  neovim
-  vim
-  emacs
-  # Code editors
-  vscode
-  # Programming
-  pyenv
-  cargo
-  rustup
-  # Terminal
-  wezterm
-  fish
-  # Utilities
-  wget
-  git
-  fastfetch
-  qbittorrent
-  # Email client
-  evolution
-  # Productivity
-  anki-bin
-  todoist
-  # Gaming
-  steam
-  # Chat
-  discord
-  # Media  
-  vlc
-  ];
+  # Define Home Manager configuration
+  home-manager.users.citypop = {
+    home.stateVersion = "25.05"; # match your NixOS release
+    imports = [ 
+      "${homeManagerDir}/home-configuration.nix" 
+      ];
+  };
 
-  # Fonts
+  # System-wide available Fonts
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.meslo-lg
@@ -142,29 +124,29 @@
     nerd-fonts.ubuntu
     nerd-fonts.ubuntu-sans
     nerd-fonts.victor-mono
-    
   ];
 
   # Enable bluetooth support system wide
+  services.blueman.enable = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
     settings = {
-	    General = {
-		    # Shows battery charge of connected devices on supported
-		    # Bluetooth adapters. Defaults to 'false'.
-		    Experimental = true;
-		    # When enabled other devices can connect faster to us, however
-		    # the tradeoff is increased power consumption. Defaults to
-		    # 'false'.
-		    FastConnectable = true;
-	    };
-	    Policy = {
-		    # Enable all controllers when they are found. This includes
-		    # adapters present on start as well as adapters that are plugged
-		    # in later on. Defaults to 'true'.
-		    AutoEnable = true;
-	    };
+      General = {
+        # Shows battery charge of connected devices on supported
+        # Bluetooth adapters. Defaults to 'false'.
+        Experimental = true;
+        # When enabled other devices can connect faster to us, however
+        # the tradeoff is increased power consumption. Defaults to
+        # 'false'.
+        FastConnectable = true;
+      };
+      Policy = {
+        # Enable all controllers when they are found. This includes
+        # adapters present on start as well as adapters that are plugged
+        # in later on. Defaults to 'true'.
+        AutoEnable = true;
+      };
     };
   };
 
@@ -176,6 +158,7 @@
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
 
+  # System-wide settings for Nvidia Hardware.
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
@@ -199,7 +182,7 @@
     open = false;
 
     # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+  # accessible via `nvidia-settings`.
     nvidiaSettings = true;
   };
 
@@ -229,5 +212,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }
