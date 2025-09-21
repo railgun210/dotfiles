@@ -15,7 +15,6 @@ nix = {
 let
   nixosDir = "/etc/nixos/";
   moduleDir = "modules/";
-  homeManagerDir = "home-manager/";
 in {
   imports =
     [ # Include the results of the hardware scan.
@@ -105,14 +104,6 @@ in {
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # Define Home Manager configuration
-  home-manager.users.citypop = {
-    home.stateVersion = "25.05"; # match your NixOS release
-    imports = [ 
-      "${homeManagerDir}/home-configuration.nix" 
-      ];
-  };
 
   # System-wide available Fonts
   fonts.packages = with pkgs; [

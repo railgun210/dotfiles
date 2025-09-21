@@ -8,19 +8,37 @@
     };
     # Add Home Manager as a flake input
     home-manager.url = "github:nix-community/home-manager";
-    # Make it follow your nixpkgs to avoid mismatched versions
+    # Make it follow your nixpkgs to avoid mismatched versions between your home and system
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager }: {
-    nixosConfigurations = {
-      citypop-linux-desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./configuration.nix
-          home-manager.nixosModules.home-manager
-        ];
+
+  outputs = { self, nixpkgs, home-manager }:
+    let
+      homeManagerDir = "./home_manager";
+      system = "x86_64-linux";
+    in { 
+      nixosConfigurations = {
+        citypop-linux-desktop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./configuration.nix
+            home-manager.nixosModules.home-manager
+          ];
+        };
       };
+      homeConfigurations = {
+        citypop = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          modules = [
+            ${homeManagerDir}/common-packages.nix
+            ${homeManagerDir}/home-configuration.nix
+            ${homeManagerDir}/desktop-environment.nix
+            ${homeManagerDir}/pyenv.nix
+          ];
+          username = "citypop";
+          homeDirectory = "/home/citypop";
+        };
+      }
     };
-  };
 }
