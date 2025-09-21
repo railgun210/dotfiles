@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
-let
-  homeManagerDir = ./home_manager; # directory with sub-configs
-in
+
 {
   nixpkgs.config = {
     allowUnfree = true;
@@ -14,10 +12,10 @@ in
 
   # Include other configuration files
   imports = [
-    "${homeManagerDir}/common-packages.nix"
-    "${homeManagerDir}/development-tools.nix"
-    "${homeManagerDir}/desktop-environment.nix"
-    "${homeManagerDir}/pyenv.nix"
+    "./common-packages.nix"
+    "./development-tools.nix"
+    "./desktop-environment.nix"
+    "./pyenv.nix"
   ];
 
   # Default shell
