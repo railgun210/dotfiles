@@ -110,9 +110,6 @@ in {
     # Install firefox.
   programs.firefox.enable = true;
 
-  # Enable Home Manager service
-  programs.home-manager.enable = true;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
