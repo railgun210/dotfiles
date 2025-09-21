@@ -29,14 +29,13 @@
       };
       homeConfigurations = {
         citypop = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
+          inherit nixpkgs;
           modules = [
             "${homeManagerDir}/common-packages.nix"
             "${homeManagerDir}/home-configuration.nix"
             "${homeManagerDir}/desktop-environment.nix"
             "${homeManagerDir}/pyenv.nix"
           ];
-          homeDirectory = "/home/${username}";
         };
       };
     };
