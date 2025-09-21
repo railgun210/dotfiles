@@ -2,31 +2,39 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-nix = {
-  package = pkgs.nixFlakes;
-  extraOptions = ''
-    experimental-features = nix-command flakes;
-  '';
-};
-
-
 { config, pkgs, ... }:
 
 let
-  nixosDir = "/etc/nixos/";
-  moduleDir = "modules/";
+  # Define the path to the modules directory.
+  # I like to keep this in a separate directory to make updating packages easier.
+  modulesDir = ./modules;
 in {
   imports =
     [ # Include the results of the hardware scan.
-      "${nixosDir}hardware-configuration.nix"
-      "${modulesDir}base-packages.nix" 
+      ./hardware-configuration.nix
+      # Include base system-wide packages.
+      modulesDir/base-packages.nix
     ];
+
+  nix = {
+    package = pkgs.nixFlakes;
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 14d";
+    };
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "citypop-linux-desktop"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -101,6 +109,9 @@ in {
 
     # Install firefox.
   programs.firefox.enable = true;
+
+  # Enable Home Manager service
+  programs.home-manager.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
