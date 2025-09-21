@@ -20,6 +20,9 @@
         ./configuration.nix # Your main NixOS configuration
         home-manager.nixosModules.home-manager
         {
+          home-manager.useUserPackages = true;
+          home-manager.useGlobalPkgs = true;
+          home-manager.backupFileExtension = ".bak";
           home-manager.users.citypop = import ./home.nix; # Link user config
         }
       ];

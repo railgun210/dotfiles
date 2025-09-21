@@ -95,10 +95,12 @@ in {
   users.groups.citypop = {};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  programs.fish.enable = true;
   users.users.citypop = {
     isNormalUser = true;
     description = "Ayun Daywhea";
     extraGroups = [ "networkmanager" "wheel" "citypop"];
+    shell = pkgs.fish;
   };
 
     # Install firefox.

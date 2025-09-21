@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  homeManagerDir = home_manager/;
+  homeManagerDir = ./home_manager;
 in {
   nixpkgs.config = {
     allowUnfree = true;
@@ -9,9 +9,6 @@ in {
   home.stateVersion = "25.05"; # set to unstable
   home.username = "citypop";
   home.homeDirectory = "/home/citypop";
-
-  # Default shell
-  programs.fish.enable = true;
 
   # Include other configuration files
   imports = [
