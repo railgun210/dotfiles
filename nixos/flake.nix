@@ -18,6 +18,7 @@
       homeManagerDir = ./home_manager;
       system = "x86_64-linux";
       username = "citypop";
+      pkgs = import nixpkgs { inherit system; };
     in { 
       nixosConfigurations = {
         citypop-linux-desktop = nixpkgs.lib.nixosSystem {
@@ -29,7 +30,7 @@
       };
       homeConfigurations = {
         citypop = home-manager.lib.homeManagerConfiguration {
-          inherit nixpkgs;
+          inherit pkgs;
           modules = [
             "${homeManagerDir}/common-packages.nix"
             "${homeManagerDir}/home-configuration.nix"
