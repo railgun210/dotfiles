@@ -19,7 +19,7 @@
     neovim
     # Terminal Tools
     tmux
-    fishplugin-tide
+    #fishplugin-tide
   ];
 }
 

@@ -7,8 +7,8 @@ in {
     allowUnfree = true;
   };
   home.stateVersion = "25.05"; # set to unstable
-  home.username = "citypop";
-  home.homeDirectory = "/home/citypop";
+  home.username = "railgun";
+  home.homeDirectory = "/home/railgun";
 
   # Include other configuration files
   imports = [

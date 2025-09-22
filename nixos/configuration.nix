@@ -32,7 +32,7 @@ in {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "citypop-linux-desktop"; # Define your hostname.
+  networking.hostName = "railgun-linux-desktop"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -92,14 +92,14 @@ in {
   # services.xserver.libinput.enable = true;
 
   # Define a user group that's the same as the username
-  users.groups.citypop = {};
+  users.groups.railgun = {};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.fish.enable = true;
-  users.users.citypop = {
+  users.users.railgun = {
     isNormalUser = true;
-    description = "Ayun Daywhea";
-    extraGroups = [ "networkmanager" "wheel" "citypop"];
+    description = "Level-5 Railgun";
+    extraGroups = [ "networkmanager" "wheel" "railgun"];
     shell = pkgs.fish;
   };
 

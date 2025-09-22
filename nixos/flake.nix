@@ -1,6 +1,6 @@
 # /etc/nixos/flake.nix
 {
-  description = "Citypop's NixOS Flake";
+  description = "Railgun's NixOS Flake";
 
   inputs = {
     nixpkgs = {
@@ -13,7 +13,7 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.citypop-linux-desktop = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.railgun-linux-desktop = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux"; # Or your system architecture
       specialArgs = { inherit inputs; }; # Pass inputs to modules
       modules = [
@@ -23,7 +23,7 @@
           home-manager.useUserPackages = true;
           home-manager.useGlobalPkgs = true;
           home-manager.backupFileExtension = ".bak";
-          home-manager.users.citypop = import ./home.nix; # Link user config
+          home-manager.users.railgun = import ./home.nix; # Link user config
         }
       ];
     };
