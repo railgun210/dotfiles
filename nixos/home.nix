@@ -16,5 +16,6 @@ in {
     "${homeManagerDir}/development-tools.nix"
     "${homeManagerDir}/desktop-environment.nix"
     "${homeManagerDir}/pyenv.nix"
+    "${homeManagerDir}/zsh.nix"
   ];
 }

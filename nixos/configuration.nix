@@ -98,11 +98,13 @@ in {
   # Define a user group that's the same as the username
   users.groups.railgun = {};
 
+  programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.railgun = {
     isNormalUser = true;
     description = "Level-5 Railgun";
     extraGroups = [ "networkmanager" "wheel" "railgun"];
+    shell = pkgs.zsh;
   };
 
     # Install firefox.

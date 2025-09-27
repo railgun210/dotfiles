@@ -3,21 +3,25 @@
 
 {
     programs.zsh = {
-    enable = true;
-    autosuggestions.enable = true;
+    enable = true; #TODO: Already configured so you can probably delete this.
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true; # May enable other completions
-
-    ohMyZsh = {
+    plugins = [
+      {                                                                                   
+        name = "powerlevel10k";                                                           
+        src = pkgs.zsh-powerlevel10k;                                                     
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";                         
+      }
+    ];
+    oh-my-zsh = {
       enable = true;
-      plugins = ["git"];
-      # Set theme to Powerlevel10k
-      theme = "powerlevel10k/powerlevel10k";
     };
 
     # Add any custom Zsh configuration here that is not handled by Oh My Zsh or Home Manager
     # For example, to source your custom Powerlevel10k configuration file:
     initExtra = ''
+      source ~/.p10k.zsh
       # Source the Powerlevel10k configuration file
       if [[ -f "$HOME/.p10k.zsh" ]]; then
         source "$HOME/.p10k.zsh"
@@ -29,7 +33,6 @@
     zsh
     oh-my-zsh
     zsh-completions
-    zsh-powerlevel10k
     zsh-syntax-highlighting
     zsh-history-substring-search
   ];
