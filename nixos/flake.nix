@@ -12,13 +12,13 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     # Lanzaboote handles Secure Boot for us
     # 0.4.2 is the latest version as of 26 SEP 2025
-    lanzaboot = {
-      url = "github:nix-community/lanzaboote/0.4.2";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, lanzaboote, ... }@inputs: {
     nixosConfigurations.railgun-linux-desktop = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux"; # Or your system architecture
       specialArgs = { inherit inputs; }; # Pass inputs to modules
@@ -31,7 +31,7 @@
           home-manager.backupFileExtension = ".bak";
           home-manager.users.railgun = import ./home.nix; # Link user config
         }
-        lanzaboot.nixosModules.lanzaboote
+        lanzaboote.nixosModules.lanzaboote
       ];
     };
   };
