@@ -17,5 +17,6 @@
     # Utilities
     wget
     git
+    sops
   ];
 }
