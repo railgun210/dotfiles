@@ -99,12 +99,10 @@ in {
   users.groups.railgun = {};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  programs.fish.enable = true;
   users.users.railgun = {
     isNormalUser = true;
     description = "Level-5 Railgun";
     extraGroups = [ "networkmanager" "wheel" "railgun"];
-    shell = pkgs.fish;
   };
 
     # Install firefox.

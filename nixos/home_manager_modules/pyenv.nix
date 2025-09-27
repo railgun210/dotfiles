@@ -4,7 +4,6 @@
 {
   programs.pyenv = {
     enable = true;
-    enableFishIntegration = true;
   };
 
   # Ensure necessary build dependencies are available if you plan to compile Python versions

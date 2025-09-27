@@ -8,10 +8,10 @@
     userName = "railgun210";
   };
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  }
-
+  programs.direnv = {
+    enable = true;
+  };
+  
   home.packages = with pkgs; [
     # Rust development
     rustup
@@ -23,7 +23,6 @@
     neovim
     # Terminal Tools
     tmux
-    #fishplugin-tide
   ];
 }
 

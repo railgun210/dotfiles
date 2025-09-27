@@ -11,7 +11,7 @@
     btop
     # Terminal
     foot
-    fish
+    bash
     # Virtual Machines
     qemu
     # Utilities
