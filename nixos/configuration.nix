@@ -34,7 +34,6 @@ in {
     enable = true;
     pkiBundle = "/var/lib/sbctl";
   };
-  #boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "railgun-linux-desktop"; # Define your hostname.
 
