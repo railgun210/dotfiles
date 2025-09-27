@@ -126,11 +126,11 @@ in {
   ];
 
   # Sops info
-  sops.defaultSopsFile = "${secretsDir}/secrets.yaml";
+  sops.defaultSopsFile = "secrets/secrets.yaml";
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/home/railgun/.config/sops/age/keys.txt"; # TODO: Fix this to not be hardcoded.
   sops.secrets.example-key = {};
-  sops.secrets."myservice.my_subdir.my_secret" = {};
+  sops.secrets."myservice/my_subdir/my_secret" = {};
 
   # Enable bluetooth support system wide
   #services.blueman.enable = true;
