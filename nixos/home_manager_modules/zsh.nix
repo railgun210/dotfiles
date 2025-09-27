@@ -3,7 +3,7 @@
 
 {
     programs.zsh = {
-    enable = true; #TODO: Already configured so you can probably delete this.
+    enable = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true; # May enable other completions
@@ -30,7 +30,6 @@
   };
 
   home.packages = with pkgs; [
-    zsh
     oh-my-zsh
     zsh-completions
     zsh-syntax-highlighting
