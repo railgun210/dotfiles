@@ -29,7 +29,11 @@ in {
   };
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = lib.mkForce true;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "railgun-linux-desktop"; # Define your hostname.
@@ -122,7 +126,7 @@ in {
   ];
 
   # Enable bluetooth support system wide
-  services.blueman.enable = true;
+  #services.blueman.enable = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
