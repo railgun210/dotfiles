@@ -13,7 +13,7 @@
     # Lanzaboote handles Secure Boot for us
     # 0.4.2 is the latest version as of 26 SEP 2025
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/";
+      url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
