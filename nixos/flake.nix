@@ -16,13 +16,19 @@
       url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, lanzaboote, sops-nix, ... }@inputs: {
     nixosConfigurations.railgun-linux-desktop = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux"; # Or your system architecture
       specialArgs = { inherit inputs; }; # Pass inputs to modules
       modules = [
+        lanzaboote.nixosModules.lanzaboote
+        sops-nix.nixosModules.sops
         ./configuration.nix # Your main NixOS configuration
         home-manager.nixosModules.home-manager
         {
@@ -31,7 +37,6 @@
           home-manager.backupFileExtension = ".bak";
           home-manager.users.railgun = import ./home.nix; # Link user config
         }
-        lanzaboote.nixosModules.lanzaboote
       ];
     };
   };

@@ -7,8 +7,6 @@
     discord
     # Email client
     evolution
-    # Gaming
-    steam
     # Media  
     vlc
     # Productivity
@@ -18,6 +16,7 @@
     # Utilities
     fastfetch
     qbittorrent
+    age # Encryption tool
   ];
 }
 

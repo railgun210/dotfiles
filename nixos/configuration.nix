@@ -28,7 +28,7 @@ in {
     };
   };
 
-  # Bootloader.
+  # Bootloader for secure boot using lanzaboote.
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.lanzaboote = {
     enable = true;

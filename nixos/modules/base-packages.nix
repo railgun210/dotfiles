@@ -1,6 +1,7 @@
 # modules/base-packages.nix
 # These are packages that are installed for every user including root.
 { config, pkgs, ... }: {
+  programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
     # Secure Boot Handler
     sbctl
