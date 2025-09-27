@@ -8,6 +8,10 @@
     userName = "railgun210";
   };
 
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  }
+
   home.packages = with pkgs; [
     # Rust development
     rustup
